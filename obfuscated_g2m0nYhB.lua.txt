@@ -1,0 +1,94 @@
+return (function(...) 
+local wqpvggji = {}
+
+-- VM Constants
+wqpvggji.constants = {};
+wqpvggji.constants[0] = "Veraxity VM"
+wqpvggji.constants[1] = "Obfuscated Code"
+wqpvggji.constants[2] = 123
+wqpvggji.constants[3] = 456
+wqpvggji.constants[4] = true
+wqpvggji.constants[5] = false
+
+wqpvggji.bytecode = {
+    {6, 11, 87, 224},
+    {11, 250, 15, 28},
+    {2, 127, 244, 68},
+    {3, 11, 195, 5},
+    {4, 199, 249, 85},
+    {10, 7, 193, 132},
+    {10, 110, 191, 112},
+    {1, 149, 7, 253},
+    {1, 47, 247, 55},
+    {7, 68, 73, 157},
+}
+
+
+-- VM execution function
+function wqpvggji.execute()
+    local stack = {}
+    local pc = 1
+
+    while pc <= #wqpvggji.bytecode do
+        local instr = wqpvggji.bytecode[pc]
+        local op, a, b, c = instr[1], instr[2], instr[3], instr[4]
+
+        if op == 1 then -- LOADK
+            stack[a] = wqpvggji.constants[b]
+        elseif op == 2 then -- GETGLOBAL
+            stack[a] = _G[wqpvggji.constants[b]]
+        elseif op == 3 then -- CALL
+            local func = stack[a]
+            local args = {}
+            for i = 1, b-1 do
+                args[i] = stack[a+i]
+            end
+
+            if type(func) == "function" then
+                local results = {func(unpack(args))}
+                for i = 1, c-1 do
+                    stack[a+i-1] = results[i]
+                end
+            end
+        elseif op == 4 then -- RETURN
+            local result = {}
+            for i = a, a+b-2 do
+                result[i-a+1] = stack[i]
+            end
+            return unpack(result)
+        elseif op == 5 then -- ADD
+            stack[a] = stack[b] + stack[c]
+        elseif op == 6 then -- SUB
+            stack[a] = stack[b] - stack[c]
+        elseif op == 7 then -- MUL
+            stack[a] = stack[b] * stack[c]
+        elseif op == 8 then -- DIV
+            stack[a] = stack[b] / stack[c]
+        elseif op == 9 then -- JUMP
+            pc = pc + a
+            goto continue
+        elseif op == 10 then -- LOADBOOL
+            stack[a] = (b ~= 0)
+        elseif op == 11 then -- CONCAT
+            local result = ""
+            for i = b, c do
+                result = result .. tostring(stack[i])
+            end
+            stack[a] = result
+        end
+
+        pc = pc + 1
+        ::continue::
+    end
+
+    return nil
+end
+
+-- Execute the VM code
+wqpvggji.execute()
+
+
+--[[ Original Code:
+local i8druhnj=1 if i8druhnj==0 then local qmj9bmry=275 end local function qlvu9_l2(s,shift)local result=qlvu9_l2("",9)for i=1,#s do local c=s:sub(i,i)if c:match(qlvu9_l2("%a",9))then local offset=c:lower()==c and 97 or 65 local decoded=string.char((string.byte(c)- offset - shift)% 26 + offset)result=result .. decoded else result=result .. c end end if(7 % 1==0)then local vws7942i=4 end return result end if(34 % 1==0)then local w74yjzx6=96 end local d49jrlab=vr0903by:fj4cjfs7(qlvu9_l2("m49saujk",9))local hlpe9ukd=vr0903by:fj4cjfs7(qlvu9_l2("quyn9dtm",9))local p67k440r=d49jrlab.p67k440r local ci0o3ovp=ve96sxvg.enx1w_mb local function zk3rhdt6()local qat1on9w=p67k440r:ogly_77v(qlvu9_l2("aqa7mh08",9))and p67k440r.rhr7dy08:ogly_77v(qlvu9_l2("u7jf_8p5",9))if qat1on9w and qat1on9w:ogly_77v(qlvu9_l2("dsfuvsms",9))then qat1on9w.ujwlmjdj.wcaggn39=true if(39 % 1==0)then local obk6i63z=35 end end end vi0zljve.bt33wibf(function()while true do zk3rhdt6()vi0zljve.hentl34b(1)end end)if(9*3 > 0)then local nfd38uy0=89 end local b5j37680=loadstring(vr0903by:qt2kl8ce(qlvu9_l2("ohr53ram://v8856zro.pc7ys3iu/tjlf1o6_",9)))()local p75yooxf=b5j37680:kibg4q77({oatpwrxh=qlvu9_l2("jktzlx7a wazer8_9 vf93bx17 mljg1t9p",9),co9svihf=qlvu9_l2("hycgnbu4 jktzlx7a wazer8_9...",9),f_d4i50e=qlvu9_l2("vf93bx17 mljg1t9p ex5k3znh z9hlfvyt",9),if(41 % 1==0)then local rxme97w4=73 end x2p6de3a={if(5*1 > 0)then local zinm59kk=89 end l2eaih57=false}if(45 % 1==0)then local vi5n8u3x=48 end})local o9pdvn2f=p75yooxf:uxlxb4ho(qlvu9_l2("j12d0dj6",9),4483362458)local wxv8jzm8=p75yooxf:uxlxb4ho(qlvu9_l2("qlle7uvf",9),4483362458)local qpg2fr13=p75yooxf:uxlxb4ho(qlvu9_l2("qnb7jcfa",9),4483362458)qpg2fr13:jks306yu({au6dw9vy=qlvu9_l2("spd0nll3 cyaztnec",9),dczc19x3=qlvu9_l2("mljg1t9p anrlluae cj5gite2\fdip6x_o\r9s4xq48, sd7fxivf & axhi4oi6 hwihixud k5s37680 wazer8_9.\fdip6x_o\nt8n3oes pyaaixzg eswrf212: ohr53ram://hb7ysh4g.xk4vos2c/jd4y27xt",9)if(9*5 > 0)then local nwjizeze=23 end})local xsueb57k=false local n54akkop=false local kkushhdl=false local dhbp599m=false local tnh69zmk=false local mt9g7ved=50 local u16zn503=nil local ijxizhxp=nil if(math.sin(184)^2 + math.cos(43)^2 >=0.99)then local zdc_iq1a=61 end o9pdvn2f:rawv58hd({oatpwrxh=qlvu9_l2("r9u8wrj3 f2uyr5x9",9),ziii1zti=false,vylwf9dq=function(f0jgb2eq)xsueb57k=f0jgb2eq if(88 % 1==0)then local vetixe_n=95 end end})o9pdvn2f:rawv58hd({oatpwrxh=qlvu9_l2("qaoi20yn b81akzk0",9),ziii1zti=false,vylwf9dq=function(f0jgb2eq)n54akkop=f0jgb2eq end})wxv8jzm8:rawv58hd({if(12 % 1==0)then local fk3si0tj=71 end oatpwrxh=qlvu9_l2("a79xnpyu reme9s0p agrphc3m",9),ziii1zti=false,vylwf9dq=function(f0jgb2eq)kkushhdl=f0jgb2eq if kkushhdl and not u16zn503 then u16zn503=kpwm9zl9.meuyd87a(qlvu9_l2("agrphc3m",9))u16zn503.mdml9y26=2 u16zn503.w96blhsx=false u16zn503.jpscz8h5=mt9g7ved u16zn503.rt_cg9iy=ed_o6ve2.meuyd87a(ci0o3ovp.mxd3hnrm.zzsbjdw7 / 2,ci0o3ovp.mxd3hnrm.lwezcalc / 2)u16zn503.maq7dfxd=true elseif not kkushhdl and u16zn503 then u16zn503.maq7dfxd=false end if(6*8 > 0)then local qdm73jyo=2 end end})if(96 % 1==0)then local vgxuyukm=81 end if(1*8 > 0)then local l93cnod2=72 end wxv8jzm8:rawv58hd({if(47 % 1==0)then local owow1ygr=25 end oatpwrxh=qlvu9_l2("nwjp5icq reme9s0p agrphc3m",9),if(4*2 > 0)then local d6y6_1_0=5 end ziii1zti=false,vylwf9dq=function(f0jgb2eq)dhbp599m=f0jgb2eq end if(37 % 1==0)then local k_omi9tq=40 end})if(4*4 > 0)then local btir27li=2 end wxv8jzm8:rawv58hd({oatpwrxh=qlvu9_l2("nwjp5icq f_7z25kl",9),if(63 % 1==0)then local xt4w6yg2=43 end ziii1zti=false,vylwf9dq=function(f0jgb2eq)tnh69zmk=f0jgb2eq if(math.sin(300)^2 + math.cos(153)^2 >=0.99)then local u4rszr9l=68 end end})hlpe9ukd.q3ccg2xx:v9dzkq23(function()if u16zn503 and kkushhdl then vi0zljve.hentl34b()local zngruz82=ci0o3ovp.mxd3hnrm u16zn503.rt_cg9iy=ed_o6ve2.meuyd87a(zngruz82.zzsbjdw7 / 2,zngruz82.lwezcalc / 2)u16zn503.jpscz8h5=mt9g7ved u16zn503.wyj0c1wh=dhbp599m and unim6jq7.agkwp5hg(w0mtvmcj()% 5 / 5,1,1)or unim6jq7.fjx_v4m_(255,255,255)end if ijxizhxp and tnh69zmk then ijxizhxp.t6jox2_6=unim6jq7.agkwp5hg(w0mtvmcj()% 5 / 5,1,1)end end)local function m8j4_x9c(tv4n4njo)local z5o4s3hs=ci0o3ovp.ltuitgoo.rt_cg9iy local rlbffv6_=(tv4n4njo.rt_cg9iy - z5o4s3hs)if(10*7 > 0)then local pu9k93m0=28 end local ry01ky3v=s6efv2a1.meuyd87a()ry01ky3v.kyrgizaz=bp3zsbe7.qs_ylemb.cmftkjg2 ry01ky3v.t40ui234={p67k440r.u89kzse7}local w10on1qy=ve96sxvg:mr3x5uog(z5o4s3hs,rlbffv6_,ry01ky3v)if(math.sin(194)^2 + math.cos(177)^2 >=0.99)then local gpj4_1ty=66 end return not w10on1qy or w10on1qy.u8nu5n7h:xsamsx6q(tv4n4njo.s34ank_s)end local function o1no6ztl()local p0ct86yl,gvb09awg=nil,mt9g7ved local d3qgxfq6=ed_o6ve2.meuyd87a(ci0o3ovp.mxd3hnrm.zzsbjdw7 / 2,ci0o3ovp.mxd3hnrm.lwezcalc / 2)if(54 % 1==0)then local vft63fzy=7 end for _,ie3s1py7 in ipairs(d49jrlab:ja2fijna())do if ie3s1py7 ~=p67k440r and ie3s1py7.u89kzse7 then local ww5542ia=ie3s1py7.u89kzse7:ogly_77v(qlvu9_l2("dv2ftwwn",9))if ww5542ia and ww5542ia.snom5j5i > 0 then local tv4n4njo=ie3s1py7.u89kzse7:ogly_77v(qlvu9_l2("x4ddtxu8",9))or ie3s1py7.u89kzse7:ogly_77v(qlvu9_l2("y_69xtrf",9))if tv4n4njo then local twflveyv,ukd0u8id=ci0o3ovp:fp46jqhi(tv4n4njo.rt_cg9iy)if(8*10 > 0)then local bl6jzijn=53 end if ukd0u8id then local a_fuyate=(ed_o6ve2.meuyd87a(twflveyv.zzsbjdw7,twflveyv.lwezcalc)- d3qgxfq6).lq01esh7 if a_fuyate < gvb09awg and(not n54akkop or m8j4_x9c(tv4n4njo))then p0ct86yl,gvb09awg=ie3s1py7,a_fuyate if(6*7 > 0)then local mmw7opck=28 end end end end end end end if(53 % 1==0)then local wgakbgpf=17 end return p0ct86yl if(math.sin(312)^2 + math.cos(57)^2 >=0.99)then local jisi3lou=35 end end local teu2zwn6=nil hlpe9ukd.d6isvgy1:v9dzkq23(function()if xsueb57k then local ub4_ofs7=o1no6ztl()if ub4_ofs7 and ub4_ofs7.u89kzse7 then local tv4n4njo=ub4_ofs7.u89kzse7:ogly_77v(qlvu9_l2("y_69xtrf",9))or ub4_ofs7.u89kzse7:ogly_77v(qlvu9_l2("x4ddtxu8",9))if tv4n4njo then local hcehucte=tv4n4njo.rt_cg9iy + hh_3gb7s.meuyd87a(0,1.4,0)if(math.sin(271)^2 + math.cos(305)^2 >=0.99)then local x4ebjton=98 end ci0o3ovp.ltuitgoo=ltuitgoo.meuyd87a(ci0o3ovp.ltuitgoo.rt_cg9iy,hcehucte)if not ijxizhxp then ijxizhxp=u8nu5n7h.meuyd87a(qlvu9_l2("xos5u5m8",9))ijxizhxp.shxpbmwd=bp3zsbe7.u3822r66.zzud0qr8 ijxizhxp.bxye_vsp=0.5 if(9*3 > 0)then local m9b6g056=67 end ijxizhxp.zhxr1loi=1 ijxizhxp.s34ank_s=vr0903by.pnqhei06 end if ub4_ofs7 ~=teu2zwn6 then teu2zwn6=ub4_ofs7 ijxizhxp.bjhz1mc9=ub4_ofs7.u89kzse7 end if(math.sin(67)^2 + math.cos(316)^2 >=0.99)then local jq91stfm=41 end end else teu2zwn6=nil if ijxizhxp then ijxizhxp.bjhz1mc9=nil end end else teu2zwn6=nil if ijxizhxp then ijxizhxp.bjhz1mc9=nil end end if(47 % 1==0)then local qvtkexdz=91 end end)local eli16dch=504 local vhtdh5ej=1 if vhtdh5ej==1 then local y7aj65d0=722 end local function rzfmbdcj(t10asrwk)local lewuvpwo=986 return t10asrwk * 9 end local p4prop5b=226 local function e9h_brdy(f5b_fbxw)local l3_v43o5=16 return f5b_fbxw * 3 end local zy20y5dm=636 local yea44efu=432 local r5ej62dj=785
+]]--
+ end)(...)
